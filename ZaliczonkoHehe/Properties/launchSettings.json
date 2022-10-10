@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ZaliczonkoHehe": {
+      "commandName": "Project",
+      "commandLineArgs": "db.json"
+    }
+  }
+}

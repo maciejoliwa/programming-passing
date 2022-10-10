@@ -1,0 +1,15 @@
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\bin\Debug\net6.0\ZaliczonkoHehe.exe
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\bin\Debug\net6.0\ZaliczonkoHehe.deps.json
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\bin\Debug\net6.0\ZaliczonkoHehe.runtimeconfig.json
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\bin\Debug\net6.0\ZaliczonkoHehe.dll
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\bin\Debug\net6.0\ZaliczonkoHehe.pdb
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\ZaliczonkoHehe.csproj.AssemblyReference.cache
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\ZaliczonkoHehe.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\ZaliczonkoHehe.AssemblyInfoInputs.cache
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\ZaliczonkoHehe.AssemblyInfo.cs
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\ZaliczonkoHehe.csproj.CoreCompileInputs.cache
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\ZaliczonkoHehe.dll
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\refint\ZaliczonkoHehe.dll
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\ZaliczonkoHehe.pdb
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\ZaliczonkoHehe.genruntimeconfig.cache
+C:\Users\avery\source\repos\ZaliczonkoHehe\ZaliczonkoHehe\obj\Debug\net6.0\ref\ZaliczonkoHehe.dll
