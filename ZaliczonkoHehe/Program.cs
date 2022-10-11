@@ -10,12 +10,6 @@ namespace Zaliczonko
     class Database
     {
         private string filepath;
-        private enum MutableAction
-        {
-            Delete,
-            Update,
-            Find
-        }
 
         public Database(string pathToDBFile)
         {
@@ -95,18 +89,30 @@ namespace Zaliczonko
             
             if (values != null)
             {
-                if (query.StartsWith("find all"))
+                if (query.StartsWith("find"))
                 {
                     if (query.Contains("where"))
                     {
                         values = FilterByQuery(values, query);
                     }
-                    foreach (Dictionary<string, JsonElement> item in values)
+                    if (query.Split(' ').Length > 1 && query.Split(' ')[1] == "all")
                     {
+                        foreach (Dictionary<string, JsonElement> item in values)
+                        {
+                            Console.Write("{\n");
+                            foreach (string key in item.Keys)
+                            {
+                                Console.WriteLine("\t{0}: {1},", key, item[key]);
+                            }
+                            Console.Write("}\n");
+                        }
+                    } else
+                    {
+                        var item = values.First();
                         Console.Write("{\n");
                         foreach (string key in item.Keys)
                         {
-                            Console.WriteLine("\t{0}: {1},", key, item[key]);
+                            Console.WriteLine("\t{0}: {1},", key, item[key]);    
                         }
                         Console.Write("}\n");
                     }
