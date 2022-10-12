@@ -23,6 +23,27 @@ namespace Zaliczonko
             filepath = pathToDBFile;
         }
 
+        private List<Dictionary<string, JsonElement>> Intersect(
+             List<Dictionary<string, JsonElement>> fullArray,
+              List<Dictionary<string, JsonElement>> toRemove
+            )
+        {
+            var toReturn = new List<Dictionary<string, JsonElement>>();
+
+            foreach (var item in fullArray)
+            {
+                foreach (var removable in toRemove)
+                {
+                    if (item["_id"].ToString() != removable["_id"].ToString())
+                    {
+                        toReturn.Add(item);
+                    }
+                }
+            }
+
+            return toReturn;
+        }
+
         private List<Dictionary<string, JsonElement>> FilterByQuery(List<Dictionary<string, JsonElement>> values, string query)
         {
             var listToReturn = new List<Dictionary<string, JsonElement>>();
@@ -80,21 +101,37 @@ namespace Zaliczonko
             return listToReturn;
         }
 
+        private string GenerateIdentifier()
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[8];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            var finalString = new String(stringChars);
+            return finalString;
+        }
+
         public void ExecuteQuery(string query)
         {
             query = query.TrimEnd();
             string fileContents = File.ReadAllText(filepath);
             var values = JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(fileContents);
+            var values2 = JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(fileContents);
 
+            if (query.Contains("where"))
+            {
+                values = FilterByQuery(values, query);
+            }
             
-            if (values != null)
+            if (values != null && values2 != null)
             {
                 if (query.StartsWith("find"))
                 {
-                    if (query.Contains("where"))
-                    {
-                        values = FilterByQuery(values, query);
-                    }
                     if (query.Split(' ').Length > 1 && query.Split(' ')[1] == "all")
                     {
                         foreach (Dictionary<string, JsonElement> item in values)
@@ -108,13 +145,20 @@ namespace Zaliczonko
                         }
                     } else
                     {
-                        var item = values.First();
-                        Console.Write("{\n");
-                        foreach (string key in item.Keys)
+                        try
                         {
-                            Console.WriteLine("\t{0}: {1},", key, item[key]);    
+                            var item = values.First();
+                            Console.Write("{\n");
+                            foreach (string key in item.Keys)
+                            {
+                                Console.WriteLine("\t{0}: {1},", key, item[key]);    
+                            }
+                            Console.Write("}\n");
                         }
-                        Console.Write("}\n");
+                        catch
+                        {
+                            Console.WriteLine("No record found.");
+                        }
                     }
                 }
                 else if (query == "clear")
@@ -140,6 +184,7 @@ namespace Zaliczonko
                     try
                     {
                         var jsonified = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(toInsert);
+                        jsonified.Add("_id", JsonSerializer.SerializeToElement<string>(GenerateIdentifier()));
                         values.Add(jsonified);
                         var overwriteDbText = JsonSerializer.Serialize(values);
 
@@ -153,6 +198,18 @@ namespace Zaliczonko
                         Console.ResetColor();
                     }
                     
+                } 
+                else if (query.StartsWith("remove"))
+                {
+                    if (query.Split(' ').Length > 1 && query.Split(' ')[1] == "all")
+                    {
+                        var intersected = Intersect(values2, values);
+                        var overwriteDbText = JsonSerializer.Serialize(intersected);
+                        Console.WriteLine(intersected.Count());
+
+                        File.WriteAllText(filepath, overwriteDbText);
+                        Console.WriteLine($"Removed {values.Count} records");
+                    }
                 }
             }
         }
